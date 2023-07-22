@@ -1,5 +1,8 @@
+import MaterialTable from "@material-table/core";
+import { Add, Delete } from "@material-ui/icons";
 import { Button, Modal } from "react-bootstrap";
-import { cities } from "../../util/cities";
+import { CLIENT } from "../constants";
+import { cities } from "../util/cities";
 
 const TheatreModal = ({
   showAddTheatreModal,
@@ -9,7 +12,10 @@ const TheatreModal = ({
   addTheatre,
   theatreDetail,
   changeTheatreDetails,
+  userType,
+  movieList,
 }) => {
+  console.log(theatreDetail);
   return (
     <Modal
       show={showAddTheatreModal || showEditTheatreModal}
@@ -79,6 +85,43 @@ const TheatreModal = ({
               className="form-control"
             />
           </div>
+
+          {userType === CLIENT && (
+            <MaterialTable
+              title="Modify the screenings in your theatre"
+              columns={[
+                {
+                  title: "Name",
+                  field: "name",
+                },
+                {
+                  title: "Release Date",
+                  field: "releaseDate",
+                },
+                {
+                  title: "Release Status",
+                  field: "releaseStatus",
+                },
+              ]}
+              data={movieList}
+              actions={[
+                (rowData) => {
+                  const isMovieScreening = theatreDetail.movies.includes(
+                    rowData._id
+                  );
+                  return {
+                    icon: isMovieScreening ? Delete : Add,
+                    tooltip: isMovieScreening
+                      ? "Remove screening"
+                      : "Add screening",
+                    onClick: () => {
+                      // Make API call to add or remove movie from theater
+                    },
+                  };
+                },
+              ]}
+            />
+          )}
 
           <div className="input-group justify-content-center">
             <div className="m-1">

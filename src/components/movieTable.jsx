@@ -1,9 +1,10 @@
 import MaterialTable from "@material-table/core";
 import { Add, Delete, Edit } from "@material-ui/icons";
 import { useState } from "react";
+import { ADMIN } from "../constants";
 import MovieModal from "./movieModal";
 
-const MovieTable = ({ movieList }) => {
+const MovieTable = ({ movieList, userType }) => {
   const [movieDetail, setMovieDetail] = useState({});
   const [showAddMovieModal, setShowAddMovieModal] = useState(false);
   const [showEditMovieModal, setShowEditMovieModal] = useState(false);
@@ -51,6 +52,10 @@ const MovieTable = ({ movieList }) => {
             ),
           },
           {
+            title: "Name",
+            field: "name",
+          },
+          {
             title: "Director",
             field: "director",
           },
@@ -63,24 +68,28 @@ const MovieTable = ({ movieList }) => {
             field: "releaseStatus",
           },
         ]}
-        actions={[
-          {
-            icon: Delete,
-            tooltip: "Delete Movie",
-            onClick: (event, rowData) => deleteMovie(rowData),
-          },
-          {
-            icon: Edit,
-            tooltip: "Edit Movie",
-            onClick: (event, rowData) => editMovie(rowData),
-          },
-          {
-            icon: Add,
-            tooltip: "Add Movie",
-            isFreeAction: true,
-            onClick: (event) => addMovie(),
-          },
-        ]}
+        actions={
+          userType === ADMIN
+            ? [
+                {
+                  icon: Delete,
+                  tooltip: "Delete Movie",
+                  onClick: (event, rowData) => deleteMovie(rowData),
+                },
+                {
+                  icon: Edit,
+                  tooltip: "Edit Movie",
+                  onClick: (event, rowData) => editMovie(rowData),
+                },
+                {
+                  icon: Add,
+                  tooltip: "Add Movie",
+                  isFreeAction: true,
+                  onClick: (event) => addMovie(),
+                },
+              ]
+            : []
+        }
       />
       <MovieModal
         showAddMovieModal={showAddMovieModal}

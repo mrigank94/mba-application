@@ -9,3 +9,13 @@ export const fetchAllBookings = async function () {
     toast.error("Error in fetching bookings");
   }
 };
+
+export const createBooking = async (booking) => {
+  try {
+    const { data } = await AxiosInstance.post(`/mba/api/v1/bookings`, booking);
+    return data;
+  } catch (ex) {
+    toast.error(ex.message);
+    console.log(ex);
+  }
+};

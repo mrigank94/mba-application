@@ -8,6 +8,7 @@ import Client from "./pages/ClientPage/client";
 import Admin from "./pages/AdminPage/admin";
 import Customer from "./pages/CustomerPage/customer";
 import MovieDetails from "./pages/MovieDetails/movieDetails";
+import MovieTheatres from "./pages/MovieTheatres/movieTheatres";
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
       <Route path="/customer" element={<Customer />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/movie/:id/details" element={<MovieDetails />} />
+      <Route
+        path="/buytickets/:moviename/:movieId"
+        element={<MovieTheatres />}
+      />
     </Routes>
   );
 }

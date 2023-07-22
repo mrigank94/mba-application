@@ -1,9 +1,10 @@
 import MaterialTable from "@material-table/core";
 import { Add, Delete, Edit } from "@material-ui/icons";
 import { useState } from "react";
+import { ADMIN } from "../constants";
 import TheatreModal from "./theatreModal";
 
-const TheatreTable = ({ theaterList }) => {
+const TheatreTable = ({ theaterList, movieList, userType }) => {
   const [theatreDetail, setTheatreDetail] = useState({});
   const [showAddTheatreModal, setShowAddTheatreModal] = useState(false);
   const [showEditTheatreModal, setShowEditTheatreModal] = useState(false);
@@ -71,12 +72,16 @@ const TheatreTable = ({ theaterList }) => {
             tooltip: "Edit Theater",
             onClick: (event, rowData) => editTheatre(rowData),
           },
-          {
-            icon: Add,
-            tooltip: "Add Theater",
-            isFreeAction: true,
-            onClick: (event) => addTheatre(),
-          },
+          ...(userType === ADMIN
+            ? [
+                {
+                  icon: Add,
+                  tooltip: "Add Theater",
+                  isFreeAction: true,
+                  onClick: (event) => addTheatre(),
+                },
+              ]
+            : []),
         ]}
       />
       <TheatreModal
@@ -87,6 +92,8 @@ const TheatreTable = ({ theaterList }) => {
         addTheatre={addTheatre}
         theatreDetail={theatreDetail}
         changeTheatreDetails={changeTheatreDetails}
+        userType={userType}
+        movieList={movieList}
       />
     </>
   );

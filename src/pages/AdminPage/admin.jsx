@@ -4,10 +4,11 @@ import { fetchAllMovies } from "../../api/movie";
 import { fetchAllTheatres } from "../../api/theatre";
 import { fetchAllUsers } from "../../api/user";
 import Navbar from "../../components/Navbar";
+import { ADMIN } from "../../constants";
 import BookingTable from "./bookingTable";
-import MovieTable from "./movieTable";
+import MovieTable from "../../components/movieTable";
 import StatsDisplay from "./statsDisplay";
-import TheatreTable from "./theatreTable";
+import TheatreTable from "../../components/theatreTable";
 import UserModal from "./userModal";
 import UserTable from "./userTable";
 
@@ -61,9 +62,15 @@ const Admin = () => {
           userList={userList}
           theaterList={theaterList}
         />
-        {selectedItem === "movies" && <MovieTable movieList={movieList} />}
+        {selectedItem === "movies" && (
+          <MovieTable movieList={movieList} userType={ADMIN} />
+        )}
         {selectedItem === "theaters" && (
-          <TheatreTable theaterList={theaterList} />
+          <TheatreTable
+            theaterList={theaterList}
+            userType={ADMIN}
+            movieList={[]}
+          />
         )}
         {selectedItem === "bookings" && (
           <BookingTable bookingList={bookingList} />
