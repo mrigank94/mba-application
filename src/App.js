@@ -9,6 +9,8 @@ import Admin from "./pages/AdminPage/admin";
 import Customer from "./pages/CustomerPage/customer";
 import MovieDetails from "./pages/MovieDetails/movieDetails";
 import MovieTheatres from "./pages/MovieTheatres/movieTheatres";
+import "./App.css";
+import Booking from "./pages/Booking/booking";
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         path="/buytickets/:moviename/:movieId"
         element={<MovieTheatres />}
       />
+      <Route path="/movie/:movieId/:theatreId" element={<Booking />} />
     </Routes>
   );
 }

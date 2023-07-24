@@ -4,6 +4,7 @@ import { fetchAllTheatres } from "../../api/theatre";
 import { CLIENT, CUSTOMER } from "../../constants";
 import MovieTable from "../../components/movieTable";
 import TheatreTable from "../../components/theatreTable";
+import Navbar from "../../components/Navbar";
 
 const Client = () => {
   const [movieList, setMovieList] = useState([]);
@@ -25,16 +26,19 @@ const Client = () => {
   }, []);
 
   return (
-    <div className="container my-5">
-      <TheatreTable
-        theaterList={theaterList}
-        userType={CLIENT}
-        movieList={movieList}
-      />
-      <div className="mt-5">
-        <MovieTable movieList={movieList} userType={CLIENT} />
+    <>
+      <Navbar />
+      <div className="container my-5">
+        <TheatreTable
+          theaterList={theaterList}
+          userType={CLIENT}
+          movieList={movieList}
+        />
+        <div className="mt-5">
+          <MovieTable movieList={movieList} userType={CLIENT} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

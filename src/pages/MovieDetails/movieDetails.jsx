@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { Link, useParams } from "react-router-dom";
 import { getMovie } from "../../api/movie";
+import MovieAttributes from "../../components/movieAttributes";
 import Navbar from "../../components/Navbar";
 import { RELEASED } from "../../constants";
 import "./movieDetails.css";
@@ -46,15 +47,11 @@ const MovieDetails = () => {
             <div className="col">
               <h2 className="hw-bolder">About the movie</h2>
               <div className="d-flex">
-                <span className="badge rounded-pill text-bg-danger m-1">
-                  {movieDetail.description}
-                </span>
-                <span className="badge rounded-pill text-bg-secondary m-1">
-                  {movieDetail.language}
-                </span>
-                <span className="badge rounded-pill text-bg-secondary m-1">
-                  {movieDetail.releaseStatus}
-                </span>
+                <MovieAttributes
+                  description={movieDetail.description}
+                  language={movieDetail.language}
+                  releaseStatus={movieDetail.releaseStatus}
+                />
               </div>
               <hr />
               <h3>{movieDetail.name}</h3>
