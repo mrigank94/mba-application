@@ -35,7 +35,7 @@ const Auth = () => {
     if (localStorage.getItem("token")) {
       switch (localStorage.getItem("userTypes")) {
         case "CUSTOMER":
-          navigate("/customer");
+          navigate("/");
           break;
         case "CLIENT":
           navigate("/client");
@@ -60,7 +60,7 @@ const Auth = () => {
       toast.success("Welcome to the app!");
       switch (data.userTypes) {
         case "CUSTOMER":
-          navigate("/customer");
+          navigate("/");
           break;
         case "CLIENT":
           navigate("/client");
