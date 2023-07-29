@@ -1,7 +1,8 @@
 import MaterialTable from "@material-table/core";
 import { Add, Delete, Edit } from "@material-ui/icons";
 import { useState } from "react";
-import { ADMIN } from "../constants";
+import { addNewTheatre } from "../api/theatre";
+import { ADMIN, CLIENT } from "../constants";
 import TheatreModal from "./theatreModal";
 
 const TheatreTable = ({ theaterList, movieList, userType }) => {
@@ -22,6 +23,10 @@ const TheatreTable = ({ theaterList, movieList, userType }) => {
     setShowEditTheatreModal(true);
   };
 
+  const editTheatreInDb = () => {
+    console.log("In edit");
+  };
+
   const deleteTheatre = (theatre) => {
     // Make an API call here
   };
@@ -29,6 +34,11 @@ const TheatreTable = ({ theaterList, movieList, userType }) => {
   const addTheatre = (theatre) => {
     setTheatreDetail({});
     setShowAddTheatreModal(true);
+  };
+
+  const addTheatreInDb = (event) => {
+    event.preventDefault();
+    const { data } = addNewTheatre(theatreDetail);
   };
 
   const changeTheatreDetails = (event) => {
@@ -72,7 +82,7 @@ const TheatreTable = ({ theaterList, movieList, userType }) => {
             tooltip: "Edit Theater",
             onClick: (event, rowData) => editTheatre(rowData),
           },
-          ...(userType === ADMIN
+          ...(userType === CLIENT
             ? [
                 {
                   icon: Add,
@@ -88,8 +98,8 @@ const TheatreTable = ({ theaterList, movieList, userType }) => {
         showAddTheatreModal={showAddTheatreModal}
         showEditTheatreModal={showEditTheatreModal}
         resetState={resetState}
-        editTheatre={editTheatre}
-        addTheatre={addTheatre}
+        editTheatre={editTheatreInDb}
+        addTheatre={addTheatreInDb}
         theatreDetail={theatreDetail}
         changeTheatreDetails={changeTheatreDetails}
         userType={userType}

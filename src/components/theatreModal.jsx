@@ -15,7 +15,6 @@ const TheatreModal = ({
   userType,
   movieList,
 }) => {
-  console.log(theatreDetail);
   return (
     <Modal
       show={showAddTheatreModal || showEditTheatreModal}
@@ -86,7 +85,7 @@ const TheatreModal = ({
             />
           </div>
 
-          {userType === CLIENT && (
+          {userType === CLIENT && showEditTheatreModal && (
             <MaterialTable
               title="Modify the screenings in your theatre"
               columns={[
@@ -106,7 +105,7 @@ const TheatreModal = ({
               data={movieList}
               actions={[
                 (rowData) => {
-                  const isMovieScreening = theatreDetail.movies.includes(
+                  const isMovieScreening = theatreDetail?.movies?.includes(
                     rowData._id
                   );
                   return {
